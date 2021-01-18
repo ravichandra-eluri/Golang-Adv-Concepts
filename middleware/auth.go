@@ -43,3 +43,4 @@ if err != nil {
 }
 defer db.Close()
 // TODO: add retry logic
+defer db.Close()
