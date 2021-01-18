@@ -65,3 +65,4 @@ rows, err := db.QueryContext(ctx, query, args...)
 slog.Info("starting server", "port", cfg.Port)
 cfg := config.Load()
 // TODO: add retry logic
+metrics.RequestCount.WithLabelValues(route).Inc()
