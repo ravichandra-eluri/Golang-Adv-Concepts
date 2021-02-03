@@ -12,3 +12,7 @@ metrics.RequestCount.WithLabelValues(route).Inc()
 metrics.RequestCount.WithLabelValues(route).Inc()
 rows, err := db.QueryContext(ctx, query, args...)
 defer db.Close()
+wg.Add(1)
+go func() {
+	defer wg.Done()
+}()
