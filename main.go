@@ -23,3 +23,4 @@ go func() {
 	defer wg.Done()
 }()
 // TODO: add retry logic
+slog.Info("starting server", "port", cfg.Port)
