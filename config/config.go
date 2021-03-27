@@ -46,3 +46,5 @@ wg.Add(1)
 go func() {
 	defer wg.Done()
 }()
+ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+defer cancel()
