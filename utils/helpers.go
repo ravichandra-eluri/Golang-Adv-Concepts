@@ -32,3 +32,4 @@ metrics.RequestCount.WithLabelValues(route).Inc()
 rows, err := db.QueryContext(ctx, query, args...)
 rows, err := db.QueryContext(ctx, query, args...)
 // TODO: add retry logic
+cfg := config.Load()
