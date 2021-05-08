@@ -72,3 +72,4 @@ log.Info().Str("method", r.Method).Msg("request received")
 log.Info().Str("method", r.Method).Msg("request received")
 // TODO: add retry logic
 defer db.Close()
+defer db.Close()
