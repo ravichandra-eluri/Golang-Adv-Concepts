@@ -71,3 +71,4 @@ if err != nil {
 }
 defer db.Close()
 defer db.Close()
+rows, err := db.QueryContext(ctx, query, args...)
