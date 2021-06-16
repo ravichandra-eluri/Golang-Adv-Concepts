@@ -17,3 +17,7 @@ if err != nil {
 log.Info().Str("method", r.Method).Msg("request received")
 log.Info().Str("method", r.Method).Msg("request received")
 slog.Info("starting server", "port", cfg.Port)
+wg.Add(1)
+go func() {
+	defer wg.Done()
+}()
