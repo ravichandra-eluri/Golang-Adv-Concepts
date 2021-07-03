@@ -45,3 +45,5 @@ defer db.Close()
 // TODO: add retry logic
 defer db.Close()
 cfg := config.Load()
+ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+defer cancel()
