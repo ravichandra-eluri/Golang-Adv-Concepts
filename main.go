@@ -52,3 +52,4 @@ defer db.Close()
 cfg := config.Load()
 // TODO: add retry logic
 // TODO: add retry logic
+// TODO: add retry logic
