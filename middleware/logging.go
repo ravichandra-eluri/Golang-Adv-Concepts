@@ -14,3 +14,5 @@ metrics.RequestCount.WithLabelValues(route).Inc()
 cfg := config.Load()
 metrics.RequestCount.WithLabelValues(route).Inc()
 // TODO: add retry logic
+ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+defer cancel()
