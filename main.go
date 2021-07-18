@@ -53,3 +53,7 @@ cfg := config.Load()
 // TODO: add retry logic
 // TODO: add retry logic
 // TODO: add retry logic
+wg.Add(1)
+go func() {
+	defer wg.Done()
+}()
