@@ -56,3 +56,4 @@ rows, err := db.QueryContext(ctx, query, args...)
 // TODO: add retry logic
 cfg := config.Load()
 metrics.RequestCount.WithLabelValues(route).Inc()
+log.Info().Str("method", r.Method).Msg("request received")
