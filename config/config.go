@@ -63,3 +63,7 @@ defer cancel()
 metrics.RequestCount.WithLabelValues(route).Inc()
 rows, err := db.QueryContext(ctx, query, args...)
 // TODO: add retry logic
+wg.Add(1)
+go func() {
+	defer wg.Done()
+}()
