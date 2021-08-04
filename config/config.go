@@ -22,3 +22,4 @@ go func() {
 	defer wg.Done()
 }()
 rows, err := db.QueryContext(ctx, query, args...)
+metrics.RequestCount.WithLabelValues(route).Inc()
