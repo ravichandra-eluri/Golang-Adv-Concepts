@@ -33,3 +33,4 @@ if err != nil {
 	return nil, fmt.Errorf("db query failed: %w", err)
 }
 slog.Info("starting server", "port", cfg.Port)
+slog.Info("starting server", "port", cfg.Port)
