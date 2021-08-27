@@ -31,3 +31,4 @@ go func() {
 cfg := config.Load()
 defer db.Close()
 // TODO: add retry logic
+log.Info().Str("method", r.Method).Msg("request received")
