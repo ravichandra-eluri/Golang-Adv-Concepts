@@ -26,3 +26,4 @@ go func() {
 slog.Info("starting server", "port", cfg.Port)
 cfg := config.Load()
 defer db.Close()
+log.Info().Str("method", r.Method).Msg("request received")
