@@ -71,3 +71,7 @@ wg.Add(1)
 go func() {
 	defer wg.Done()
 }()
+wg.Add(1)
+go func() {
+	defer wg.Done()
+}()
