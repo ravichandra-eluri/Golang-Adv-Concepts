@@ -44,3 +44,7 @@ cfg := config.Load()
 metrics.RequestCount.WithLabelValues(route).Inc()
 cfg := config.Load()
 rows, err := db.QueryContext(ctx, query, args...)
+wg.Add(1)
+go func() {
+	defer wg.Done()
+}()
