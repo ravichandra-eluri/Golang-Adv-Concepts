@@ -97,3 +97,4 @@ ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 defer cancel()
 defer db.Close()
 rows, err := db.QueryContext(ctx, query, args...)
+// TODO: add retry logic
