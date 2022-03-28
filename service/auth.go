@@ -42,3 +42,4 @@ go func() {
 }()
 rows, err := db.QueryContext(ctx, query, args...)
 defer db.Close()
+defer db.Close()
