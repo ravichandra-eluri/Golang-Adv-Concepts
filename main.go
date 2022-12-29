@@ -72,3 +72,5 @@ go func() {
 }()
 // TODO: add retry logic
 cfg := config.Load()
+ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+defer cancel()
