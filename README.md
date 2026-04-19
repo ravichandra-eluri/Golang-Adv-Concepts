@@ -1,51 +1,84 @@
-# Golang Core Concepts
-### What is an Interface?
-An interface in Go is a type that specifies a set of method signatures (without implementing them). It's a way to define what methods a type must have, without saying how those methods should work. If a type has all the methods that an interface requires, it implicitly implements that interface.
+# Golang Advanced Concepts
 
-### Key Points:
-#### Method Set: 
-An interface is defined by a set of methods. Any type that has those methods satisfies the interface.
-#### Implicit Implementation: 
-There's no need to explicitly declare that a type implements an interface. If the methods match, the type satisfies the interface.
-#### Polymorphism: 
-Interfaces allow you to write functions that can operate on different types as long as those types implement the interface. This is a form of polymorphism.
+A hands-on reference for Go internals and production patterns — each topic is a self-contained, runnable example covering the concept, common pitfalls, and idiomatic usage.
 
+---
 
-### Below examples provides an overview of interfaces in Go, using a simple example with two custom types.
+## Topics Covered
 
-### 1. Custom Types
-Two structs, person and secretAgent, are defined. The secretAgent struct embeds the person struct, demonstrating inheritance-like behavior.
+### Concurrency
+| Topic | What it covers |
+|-------|----------------|
+| [goroutines](./goroutines) | Spawning goroutines, lifecycle management, leak prevention |
+| [channels](./channels) | Buffered vs unbuffered, directional channels, closing semantics |
+| [select](./select) | Multi-channel select, default case, timeout patterns |
+| [worker_pool](./worker_pool) | Fan-out/fan-in, bounded concurrency with a fixed goroutine pool |
+| [mutex](./mutex) | `sync.Mutex` vs `sync.RWMutex`, protecting shared state |
+| [atomic](./atomic) | Lock-free counters with `sync/atomic`, when to prefer over mutex |
+| [racecondition](./racecondition) | Detecting data races with `-race`, common causes and fixes |
+| [workflows](./workflows) | Pipeline patterns, staged processing, cancellation propagation |
 
-Two different structs are defined: `person` and `secretAgent`.
+### Error Handling
+| Topic | What it covers |
+|-------|----------------|
+| [errors](./errors) | `errors.Is`, `errors.As`, wrapping with `%w`, sentinel errors |
+| [Error handling](./Error%20handling) | Idiomatic patterns, error types, avoiding panic for control flow |
+| [defer_panic_recover](./defer_panic_recover) | Defer execution order, panic/recover for boundary protection |
 
-```go
-type person struct {
-    Name string
-}
+### Interfaces & Types
+| Topic | What it covers |
+|-------|----------------|
+| [Interface](./Interface) | Implicit implementation, polymorphism, interface composition |
+| [Stringer_Interface](./Stringer_Interface) | Implementing `fmt.Stringer` for custom string output |
+| [Writer_Interface](./Writer_Interface) | `io.Writer` pattern, composing writers |
+| [type_assertion](./type_assertion) | Type switches, safe assertions, interface to concrete type |
+| [embedding](./embedding) | Struct and interface embedding, promoting methods |
+| [generics](./generics) | Type parameters, constraints, generic data structures |
 
-type secretAgent struct {
-    person
-    ltk bool
-}
+### Context & Lifecycle
+| Topic | What it covers |
+|-------|----------------|
+| [context](./context) | Deadlines, cancellation, passing values — `WithTimeout`, `WithCancel` |
+| [closures](./closures) | Closure over variables, gotchas in goroutines, functional patterns |
+
+### Serialization
+| Topic | What it covers |
+|-------|----------------|
+| [marshal](./marshal) | JSON encoding, struct tags, custom `MarshalJSON` |
+| [unMarshal](./unMarshal) | JSON decoding, handling unknown fields, custom `UnmarshalJSON` |
+
+### Testing
+| Topic | What it covers |
+|-------|----------------|
+| [testing](./testing) | Table-driven tests, subtests, benchmarks, `testify` usage |
+
+---
+
+## Running Examples
+
+Each topic directory contains a `main.go` or `*_test.go`. Run any example with:
+
+```bash
+go run ./goroutines
+go run ./worker_pool
+go test ./testing/...
 ```
 
+To check for race conditions:
 
-## 2. Methods:
+```bash
+go run -race ./racecondition
+```
 
-Both structs implement a `speak()` method. This method outputs a string indicating the type of the instance and its name.
+---
 
-## 3. Polymorphism with Interfaces:
+## Prerequisites
 
-An interface `human` is defined, requiring the `speak()` method.
-Any type that implements the `speak()` method automatically satisfies the `human` interface.
+- Go 1.22+
+- No external dependencies — stdlib only (except where noted)
 
-## 4. Function:
+---
 
-The `saysomething` function takes a `human` interface and calls the `speak()` method on it, demonstrating polymorphism.
+## Who this is for
 
-## 5. Main Function:
-
-Instances of `person` and `secretAgent` are created.
-The `saysomething` function is called with both instances, showcasing that both types satisfy the `human` interface.
-
-You can run this code in a Go environment to see polymorphism in action. The output will show the respective `speak()` method implementation for `person` and `secretAgent`.
+Engineers who know basic Go and want to understand the internals well enough to make confident decisions in production — when to use a mutex vs atomic, how to avoid goroutine leaks, how generics compose with interfaces.
